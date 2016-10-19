@@ -2,7 +2,7 @@ diff --git a/net/lighttpd/Makefile b/net/lighttpd/Makefile
 index 7519c07..495ea38 100644
 --- a/net/lighttpd/Makefile
 +++ b/net/lighttpd/Makefile
-@@ -8,12 +8,15 @@
+@@ -8,12 +8,16 @@
  include $(TOPDIR)/rules.mk
  
  PKG_NAME:=lighttpd
@@ -17,6 +17,7 @@ index 7519c07..495ea38 100644
 +
 +PKG_HASH:=c46f0ce027155924a53bf12cb306b3afb77bbd65
 +PKG_SOURCE_PROTO:=git
++PKG_SOURCE_SUBDIR:=$(PKG_NAME)
 +PKG_SOURCE_URL:=https://github.com/lighttpd/lighttpd1.4.git
 +PKG_SOURCE_VERSION:=$(PKG_HASH)
 +PKG_SOURCE:=$(PKG_NAME)-$(PKG_HASH).tar.gz
