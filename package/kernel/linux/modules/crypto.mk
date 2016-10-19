@@ -104,7 +104,8 @@ define KernelPackage/crypto-rng
   KCONFIG:= \
 	CONFIG_CRYPTO_DRBG \
 	CONFIG_CRYPTO_DRBG_HMAC=y \
-	CONFIG_CRYPTO_DRBG_HASH=n \
+	CONFIG_CRYPTO_DRBG_HASH=y \
+	CONFIG_CRYPTO_DRBG_CTR=y \
 	CONFIG_CRYPTO_DRBG_MENU \
 	CONFIG_CRYPTO_JITTERENTROPY \
 	CONFIG_CRYPTO_RNG2
@@ -113,7 +114,7 @@ define KernelPackage/crypto-rng
 	$(LINUX_DIR)/crypto/jitterentropy_rng.ko@ge4.2 \
 	$(LINUX_DIR)/crypto/krng.ko@lt4.2 \
 	$(LINUX_DIR)/crypto/rng.ko
-  AUTOLOAD:=$(call AutoLoad,09,drbg@ge4.2 jitterentropy_rng@ge4.2 krng@lt4.2 rng)
+  AUTOLOAD:=$(call AutoLoad,09,drbg jitterentropy_rng krng@lt4.2 rng)
   $(call AddDepends/crypto)
 endef
 
