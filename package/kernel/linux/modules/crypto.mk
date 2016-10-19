@@ -100,8 +100,12 @@ $(eval $(call KernelPackage,crypto-wq))
 
 define KernelPackage/crypto-rng
   TITLE:=CryptoAPI random number generation
+  DEPENDS:=+kmod-crypto-hash +kmod-crypto-hmac +kmod-crypto-sha256
   KCONFIG:= \
 	CONFIG_CRYPTO_DRBG \
+	CONFIG_CRYPTO_DRBG_HMAC=y \
+	CONFIG_CRYPTO_DRBG_HASH=n \
+	CONFIG_CRYPTO_DRBG_MENU \
 	CONFIG_CRYPTO_JITTERENTROPY \
 	CONFIG_CRYPTO_RNG2
   FILES:= \
@@ -129,6 +133,19 @@ endef
 
 $(eval $(call KernelPackage,crypto-iv))
 
+
+define KernelPackage/crypto-echainiv
+  TITLE:=Encrypted Chain IV Generator
+  DEPENDS:=+kmod-crypto-aead
+  KCONFIG:=CONFIG_CRYPTO_ECHAINIV
+  FILES:=$(LINUX_DIR)/crypto/echainiv.ko
+  AUTOLOAD:=$(call AutoLoad,09,echainiv)
+  $(call AddDepends/crypto)
+endef
+
+$(eval $(call KernelPackage,crypto-echainiv))
+
+
 define KernelPackage/crypto-seqiv
   TITLE:=CryptoAPI Sequence Number IV Generator
   DEPENDS:=+kmod-crypto-aead +kmod-crypto-rng
@@ -140,13 +157,14 @@ endef
 
 $(eval $(call KernelPackage,crypto-seqiv))
 
-
 define KernelPackage/crypto-hw-talitos
   TITLE:=Freescale integrated security engine (SEC) driver
   DEPENDS:=+kmod-crypto-manager +kmod-crypto-hash +kmod-random-core +kmod-crypto-authenc
   KCONFIG:= \
 	CONFIG_CRYPTO_HW=y \
-	CONFIG_CRYPTO_DEV_TALITOS
+	CONFIG_CRYPTO_DEV_TALITOS \
+	CONFIG_CRYPTO_DEV_TALITOS1=y \
+	CONFIG_CRYPTO_DEV_TALITOS2=y
   FILES:= \
 	$(LINUX_DIR)/drivers/crypto/talitos.ko
   AUTOLOAD:=$(call AutoLoad,09,talitos)
