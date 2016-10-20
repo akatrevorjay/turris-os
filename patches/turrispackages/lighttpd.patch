@@ -13,9 +13,9 @@ index 7519c07..495ea38 100644
 -PKG_SOURCE_URL:=http://download.lighttpd.net/lighttpd/releases-1.4.x
 -PKG_MD5SUM:=53c55d7e1dac7adec161cd5490491f6d
 +PKG_VERSION:=1.4.40
-+PKG_RELEASE:=10
++PKG_RELEASE:=11
 +
-+PKG_HASH:=bd8b58cea53d556d3bcd9062b277f74a6c1e8c68
++PKG_HASH:=8861c2bb54f31c8fbbf6733d4de7bf54d940dec6
 +PKG_SOURCE_PROTO:=git
 +PKG_SOURCE_SUBDIR:=$(PKG_NAME)
 +PKG_SOURCE_URL:=https://github.com/lighttpd/lighttpd1.4.git
