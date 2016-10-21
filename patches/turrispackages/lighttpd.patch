@@ -3,7 +3,31 @@ new file mode 100644
 index 7519c07..495ea38 100644
 --- /dev/null
 +++ b/net/lighttpd/patches/bisect.patch
-@@ -0,0 +1,109 @@
+@@ -0,0 +1,142 @@
++--- a/src/connections-glue.c
+++++ b/src/connections-glue.c
++@@ -377,20 +377,8 @@ handler_t connection_handle_read_post_st
++ 		  : HANDLER_WAIT_FOR_EVENT;
++ 	}
++ }
++ 
++ void connection_response_reset(server *srv, connection *con) {
++ 	UNUSED(srv);
+++	UNUSED(con);
++-
++-	con->http_status = 0;
++-	con->is_writable = 1;
++-	con->file_finished = 0;
++-	con->file_started = 0;
++-	con->got_response = 0;
++-	con->parsed_response = 0;
++-	con->response.keep_alive = 0;
++-	con->response.content_length = -1;
++-	con->response.transfer_encoding = 0;
++-	buffer_reset(con->physical.path);
++-	array_reset(con->response.headers);
++-	chunkqueue_reset(con->write_queue);
++ }
 +--- a/src/mod_cgi.c
 ++++ b/src/mod_cgi.c
 +@@ -116,7 +116,7 @@ static void cgi_handler_ctx_free(handler
