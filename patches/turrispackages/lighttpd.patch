@@ -3,7 +3,7 @@ new file mode 100644
 index 7519c07..495ea38 100644
 --- /dev/null
 +++ b/net/lighttpd/patches/bisect.patch
-@@ -0,0 +1,142 @@
+@@ -0,0 +1,133 @@
 +--- a/src/connections-glue.c
 ++++ b/src/connections-glue.c
 +@@ -377,20 +377,8 @@ handler_t connection_handle_read_post_st
